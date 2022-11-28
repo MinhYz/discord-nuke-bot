@@ -11,8 +11,18 @@ local function hasKey()
     end
 end
 
-_G.wl_key = "008495045153969e138b9bec1db04b73b039078c"
-hasKey()
+-- // Key loader
+if not isfolder("Vision/Core") then
+    print("[Vision] Making folders...")
+    makefolder("Vision/Core")
+    print("[Vision] Folders made!")
+end
+
+if isfile("Vision/Core/auth.txt") then
+    _G.wl_key = tostring(readfile("Vision/Core/auth.txt"))
+    hasKey()
+    return;
+end
 
 local ScreenGui = Instance.new("ScreenGui")
 local Shadow = Instance.new("ImageLabel")
@@ -445,7 +455,7 @@ KeyInput.FocusLost:Connect(function()
         local request = (syn and syn.request) or (http and http.request) or request
 
         local response = request({
-            Url = "https://visionhub.dev/validator.php?key=" .. KeyInput.Text,
+            Url = "https://visionhub.dev/validator.php?key=008495045153969e138b9bec1db04b73b039078c",
             Method = "GET"
         })
         if response.Body == 'Active' or response.Body == 'Assigned' then
