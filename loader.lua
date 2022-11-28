@@ -2,27 +2,10 @@
 
 repeat task.wait() until game:isLoaded()
 
-local function hasKey()
-    print('[Vision] Key Detected')
-    print('[Vision] Starting Vision')
-    local success, err = pcall(function() loadstring(game:HttpGet("https://visionhub.dev/script.lua"))() end)
-    if not success then
-        print('[Vision] Error: ' .. err)
-    end
-end
+print('[Vision] Key Detected')
+print('[Vision] Starting Vision')
+loadstring(game:HttpGet("https://visionhub.dev/script.lua"))() end)
 
--- // Key loader
-if not isfolder("Vision/Core") then
-    print("[Vision] Making folders...")
-    makefolder("Vision/Core")
-    print("[Vision] Folders made!")
-end
-
-if isfile("Vision/Core/auth.txt") then
-    _G.wl_key = tostring(readfile("Vision/Core/auth.txt"))
-    hasKey()
-    return;
-end
 
 local ScreenGui = Instance.new("ScreenGui")
 local Shadow = Instance.new("ImageLabel")
@@ -429,10 +412,6 @@ local function PopupShow(options)
         end
     end
 end
-
-DestroyAfter = true,
-_G.wl_key ='008495045153969e138b9bec1db04b73b039078c'
-hasKey()
 
 KeyInput.FocusLost:Connect(function()
     if string.len(KeyInput.Text) == 0 then
