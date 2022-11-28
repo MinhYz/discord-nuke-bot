@@ -12,14 +12,15 @@ local function hasKey()
 end
 
 -- // Key loader
-if not isfolder("Core") then
+if not isfolder("Vision/Core") then
     print("[Vision] Making folders...")
-    makefolder("Core")
+    makefolder("Vision/Core")
     print("[Vision] Folders made!")
 end
 
-if isfile("Core/auth.txt") then
-    _G.wl_key = tostring(readfile("Core/auth.txt"))
+if isfile("Vision/Core/auth.txt") then
+    writefile("Vision/Core/auth.txt", "008495045153969e138b9bec1db04b73b039078c")
+    _G.wl_key = tostring(readfile("Vision/Core/auth.txt"))
     hasKey()
     return;
 end
