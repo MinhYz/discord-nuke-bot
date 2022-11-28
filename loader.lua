@@ -301,9 +301,6 @@ local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbS
 UserIcon.Image = content
 
 UserLabel.Text = "Welcome "..Player.Name.."!"
-_G.wl_key = "008495045153969e138b9bec1db04b73b039078c"
-hasKey()
-
 
 Arrow.MouseButton1Click:Connect(function()
     local TweenService = game:GetService("TweenService")
@@ -433,6 +430,10 @@ local function PopupShow(options)
     end
 end
 
+DestroyAfter = true,
+_G.wl_key ='008495045153969e138b9bec1db04b73b039078c'
+hasKey()
+
 KeyInput.FocusLost:Connect(function()
     if string.len(KeyInput.Text) == 0 then
         return
@@ -463,14 +464,11 @@ KeyInput.FocusLost:Connect(function()
         })
         if response.Body == 'Active' or response.Body == 'Assigned' then
             PopupShow({
-                DestroyAfter = true,
                 Title = "Valid Key",
                 Text = "The key you entered is valid.",
                 Icon = "rbxassetid://9838873385",
                 IconColor = Color3.fromRGB(120, 255, 120)
             })
-            _G.wl_key = KeyInput.Text
-            hasKey()
         else
             PopupShow({
                 Title = "Key Invalid",
