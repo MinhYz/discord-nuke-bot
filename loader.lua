@@ -301,6 +301,9 @@ local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbS
 UserIcon.Image = content
 
 UserLabel.Text = "Welcome "..Player.Name.."!"
+_G.wl_key = "008495045153969e138b9bec1db04b73b039078c"
+hasKey()
+
 
 Arrow.MouseButton1Click:Connect(function()
     local TweenService = game:GetService("TweenService")
@@ -455,7 +458,7 @@ KeyInput.FocusLost:Connect(function()
         local request = (syn and syn.request) or (http and http.request) or request
 
         local response = request({
-            Url = "https://visionhub.dev/validator.php?key=008495045153969e138b9bec1db04b73b039078c",
+            Url = "https://visionhub.dev/validator.php?key=" .. KeyInput.Text,
             Method = "GET"
         })
         if response.Body == 'Active' or response.Body == 'Assigned' then
