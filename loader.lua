@@ -2,10 +2,27 @@
 
 repeat task.wait() until game:isLoaded()
 
-print('[Vision] Key Detected')
-print('[Vision] Starting Vision')
-loadstring(game:HttpGet("https://visionhub.dev/script.lua"))() end)
+local function hasKey()
+    print('[Vision] Key Detected')
+    print('[Vision] Starting Vision')
+    local success, err = pcall(function() loadstring(game:HttpGet("https://visionhub.dev/script.lua"))() end)
+    if not success then
+        print('[Vision] Error: ' .. err)
+    end
+end
 
+-- // Key loader
+if not isfolder("Core") then
+    print("[Vision] Making folders...")
+    makefolder("Core")
+    print("[Vision] Folders made!")
+end
+
+if isfile("Core/auth.txt") then
+    _G.wl_key = tostring(readfile("Core/auth.txt"))
+    hasKey()
+    return;
+end
 
 local ScreenGui = Instance.new("ScreenGui")
 local Shadow = Instance.new("ImageLabel")
@@ -443,11 +460,14 @@ KeyInput.FocusLost:Connect(function()
         })
         if response.Body == 'Active' or response.Body == 'Assigned' then
             PopupShow({
+                DestroyAfter = true,
                 Title = "Valid Key",
                 Text = "The key you entered is valid.",
                 Icon = "rbxassetid://9838873385",
                 IconColor = Color3.fromRGB(120, 255, 120)
             })
+            _G.wl_key = KeyInput.Text
+            hasKey()
         else
             PopupShow({
                 Title = "Key Invalid",
